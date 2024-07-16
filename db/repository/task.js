@@ -60,8 +60,10 @@ const remove = async (id) => {
 
 const removeMany = async ids => {
     try {
-        const result = await Tasks.deleteMany({_id: { $in: ids }});
-        return result
+        const { deletedCount } = await Tasks.deleteMany({_id: { $in: ids }});
+        objToReturn = {deletedCount, ids}
+        return objToReturn
+       //returned result = { "acknowledged": true, "deletedCount": 2 }
     } catch (error) {
         console.log('Error  : ', error.message)
     }

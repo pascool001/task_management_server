@@ -3,8 +3,7 @@ const validator = require("validator");
 // const hashedPassword = require("../../utils/hashed_password")
 
 const userSchema = new Schema({
-      name: {
-        type: String,
+      name: {type: String,
         required: true,
         trim: true
       },
@@ -42,11 +41,11 @@ const userSchema = new Schema({
       
     })
 
-    userSchema.pre('save', async function (next) {
-      if (this.isNew) {
-        //this.password = await hashedPassword(this.password) // password deja hashé au niveau du tmpUser
-      }
-      next()
-    })
+    // userSchema.pre('save', async function (next) {
+    //   if (this.isNew) {
+    //     //this.password = await hashedPassword(this.password) // password deja hashé au niveau du tmpUser
+    //   }
+    //   next()
+    // })
 
 module.exports = model('User', userSchema);
