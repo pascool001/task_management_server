@@ -6,9 +6,11 @@ var logger = require('morgan');
 require('dotenv').config();
 require('./db/connection')
 
+global.__basedir = __dirname; //mettre le directory courant dans la variable globale __basedir accessible partout
+
 var cors = require('cors');
 
-const {taskRoutes, userRoutes, authRoutes} = require('./routes');
+const {taskRoutes, userRoutes, authRoutes, fileRoutes} = require('./routes');
 
 var app = express();
 
@@ -25,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/files', fileRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

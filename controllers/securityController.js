@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken');
 const login = async (request, response) => {
     const {email, password} = request.body;
     const result = await SecurityService.login({email, password});
-    console.log('login result: ', result)
 
     if (result.data && result.status == 200) {
         const {accessToken, refreshToken} = result.data;

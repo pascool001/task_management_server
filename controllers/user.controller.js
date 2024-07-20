@@ -30,7 +30,6 @@ const getOneUser = async (request, response) => {
     return response.json( {...TodoData})
 }
 
-
 const deleteUser =  async (request, response) => {
     let id = request.params.id;
     const result = await UserRepo.remove(id)
