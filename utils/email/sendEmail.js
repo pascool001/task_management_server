@@ -11,26 +11,25 @@ const mailgunAuth = {
     auth: {apikey, domain }
 }
 
-
 const mailjetAuth = {
     apiKey: '7766ef2151ec2b223f2475976d4426f1',
     apiSecret: '716ac7c0577c9796f2728e33918a00f1'
 }
 
 const sendEmail = async (email, subject, payload, template) => {
+
   try {
-    console.log('AUTH: ', auth)
     // create reusable transporter object using the default SMTP transport
-    // const transporter = nodemailer.createTransport({
-    //   port: 1025,
-    //   auth: {
-    //     user: 'user',
-    //     pass: 'password', // naturally, replace both with your real credentials or an application-specific password
-    //   },
-    // });
+    const transporter = nodemailer.createTransport({
+      port: 1025,
+      auth: {
+        user: 'user',
+        pass: 'password', // naturally, replace both with your real credentials or an application-specific password
+      },
+    });
 
     // const transporter = nodemailer.createTransport(nodemailMailgun(mailgunAuth));
-    const transporter = nodemailer.createTransport(mailjetTransport({auth: mailjetAuth}));
+    // const transporter = nodemailer.createTransport(mailjetTransport({auth: mailjetAuth}));
 
     const source = fs.readFileSync(path.join(__dirname, template), "utf8");
     const compiledTemplate = handlebars.compile(source);
