@@ -2,7 +2,7 @@ const { UserRepo } = require("../db/repository")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const {TmpUser} = require("../db/model")
-const sendEmail = require('../utils/email/sendEmail');
+const sendEmail = require('../utils/email/sendEmail_2');
 const user = require("../db/model/user");
 
 const login = async ({email, password}) => {
@@ -62,11 +62,11 @@ const Register = async (userData) => {
       const user = await (new TmpUser(userData)).save()
 
       const link = `${process.env.URL_PROTOCOL}://${process.env.CLIENT_URL}${process.env.ACTIVATION_PATH}?token=${user.token}&id=${user._id}`;
-      console.log('link: ', link)
+
       const payload = {name: user.name, link}
 
       await sendEmail(user.email, "vérification et activation de compte", payload, "./template/emailVerification.handlebars")
-      console.log('Email Sent ')
+   
       return { status: 200, message: `création de compte entamée avec succes. Un email a été envoyé sur ${user.email}, pour verification et activation. `, data: null}
     
     } catch (error) {
@@ -112,25 +112,9 @@ const Activation = async (payload) => {
 
 }  
 
-// const createAccount = async userData => {
-//   const {email} = userData;
-//   const user = await findOne({email});
-//   if(user){
-//       return {status: 422, message: "ce compte existe deja", data: null}
-//   } 
-//   try {
-//       const newUser = await create(userData)
-//       return {status: 200, message: "creation reussie", data: {...newUser.toJSON()}}
-//   } catch (error) {
-//       return {status: 500, message: "erreur serveur", data: null}
-//   }
-// }
-
-
 
 module.exports = {
     login,
     Register,
     Activation
   }
-  // createAccount

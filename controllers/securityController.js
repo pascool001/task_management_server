@@ -19,7 +19,6 @@ const login = async (request, response) => {
 const register = async (req, res) => {
     const {body} = req
     const result = await SecurityService.Register(body)
-    console.log('register result: ', result)
     res.status(result.status).json({...result})
 }
 
