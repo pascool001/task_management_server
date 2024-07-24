@@ -13,6 +13,7 @@ const sendEmail = async (email, subject, payload, template) => {
         domain: process.env.MAILGUN_DOMAINE,
       }
     }));
+    console.log("mailgun params: ", process.env.MAILGUN_API_KEY, '  ', process.env.MAILGUN_DOMAINE)
 
     const source = fs.readFileSync(path.join(__dirname, template), "utf8");
     const compiledTemplate = handlebars.compile(source);
@@ -31,6 +32,7 @@ const sendEmail = async (email, subject, payload, template) => {
       if (error) {
         return error;
       } else {
+        console.log('successfully sent !!')
         return res.status(200).json({
           success: true,
         });

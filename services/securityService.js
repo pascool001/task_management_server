@@ -62,11 +62,11 @@ const Register = async (userData) => {
       const user = await (new TmpUser(userData)).save()
 
       const link = `${process.env.URL_PROTOCOL}://${process.env.CLIENT_URL}${process.env.ACTIVATION_PATH}?token=${user.token}&id=${user._id}`;
-
+      console.log('link: ', link)
       const payload = {name: user.name, link}
 
       await sendEmail(user.email, "vérification et activation de compte", payload, "./template/emailVerification.handlebars")
-   
+      console.log('Mail sent !!')
       return { status: 200, message: `création de compte entamée avec succes. Un email a été envoyé sur ${user.email}, pour verification et activation. `, data: null}
     
     } catch (error) {
