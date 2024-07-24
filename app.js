@@ -14,7 +14,8 @@ const {taskRoutes, userRoutes, authRoutes, fileRoutes} = require('./routes');
 
 var app = express();
 
-app.use(cors({origin:"https://taskman1.onrender.com"}))
+// app.use(cors({origin:"https://taskman1.onrender.com"}))
+app.use(cors())
 
 // view engine setup
 app.use(logger('dev'));
