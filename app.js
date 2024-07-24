@@ -26,9 +26,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "dist")));
 // app.use('/profile', express.static(path.join(__dirname, 'upload')));
 
+app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/users', userRoutes);
-app.use('/api/auth', authRoutes);
 app.use('/api/files', fileRoutes);
 
 // catch 404 and forward to error handler
