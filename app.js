@@ -14,7 +14,7 @@ const {taskRoutes, userRoutes, authRoutes, fileRoutes} = require('./routes');
 
 var app = express();
 
-app.use(cors())
+app.use(cors({origin:"http://localhost:4000"}))
 
 // view engine setup
 app.use(logger('dev'));
