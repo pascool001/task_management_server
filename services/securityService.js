@@ -61,7 +61,7 @@ const Register = async (userData) => {
 
       const user = await (new TmpUser(userData)).save()
 
-      const link = `${process.env.URL_PROTOCOL}://${process.env.CLIENT_URL}${process.env.ACTIVATION_PATH}?token=${user.token}&id=${user._id}`;
+      const link = `${process.env.URL_PROTOCOL}://${process.env.CLIENT_URL}/#${process.env.ACTIVATION_PATH}?token=${user.token}&id=${user._id}`;
       console.log('link: ', link)
       const payload = {name: user.name, link}
 
