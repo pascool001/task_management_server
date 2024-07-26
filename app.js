@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// const ejs = require('ejs')
 require('dotenv').config();
 require('./db/connection')
 
@@ -17,17 +16,21 @@ var app = express();
 
 // app.use(cors({origin:"https://taskman1.onrender.com"}))
 app.use(cors())
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
 
 // view engine setup
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-app.engine('html', require('ejs').renderFile);
-app.set('view engine', 'html');
-app.use(express.static(path.join(__dirname, "dist")));
-// app.use('/profile', express.static(path.join(__dirname, 'upload')));
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/api/auth', authRoutes);
+app.use('/api/tasks', taskRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/files', fileRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -47,10 +50,6 @@ app.use(function(err, req, res, next) {
 });
 
 
-app.use('/api/auth', authRoutes);
-app.use('/api/tasks', taskRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/files', fileRoutes);
 
 
 module.exports = app;
