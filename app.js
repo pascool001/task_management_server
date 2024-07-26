@@ -25,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 // app.set('view engine', 'pug')
-app.use(express.static(path.join(__dirname, "dist")));
+app.use(express.static(path.join(__dirname, "dist"), { index: ['index.html', 'index.htm'] }));
 // app.use('/profile', express.static(path.join(__dirname, 'upload')));
 
 // catch 404 and forward to error handler
