@@ -3,7 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// const pug = require('pug')
+// const ejs = require('ejs')
 require('dotenv').config();
 require('./db/connection')
 
@@ -24,8 +24,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
-// app.set('view engine', 'pug')
-app.use(express.static(path.join(__dirname, "dist"), { index: ['index.html', 'index.htm'] }));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.use(express.static(path.join(__dirname, "dist")));
 // app.use('/profile', express.static(path.join(__dirname, 'upload')));
 
 // catch 404 and forward to error handler
