@@ -52,13 +52,13 @@ const User = require("../db/model/user")
     const user = await User.findById(userId)
     console.log('user: ', user)
     // suppression du fichier apres la maj du model
-    try {
-        fs.unlinkSync(filepath);
-        console.log(`File ${filepath} has been deleted.`);
-    } catch (err) {
-        console.log('fs.unlinkSync error: ', err)
-        console.error(err);
-    }
+    // try {
+    //     fs.unlinkSync(filepath);
+    //     console.log(`File ${filepath} has been deleted.`);
+    // } catch (err) {
+    //     console.log('fs.unlinkSync error: ', err)
+    //     console.error(err);
+    // }
 
     res.status(200).send({...user.toJSON()});
   }
