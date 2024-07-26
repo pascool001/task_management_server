@@ -1,5 +1,5 @@
-const uploadFile = require("../middlewares/uploadFiles");
-const fs = require("fs");
+// const uploadFile = require("../middlewares/uploadFiles");
+// const fs = require("fs");
 const convertB64 = require('../utils/convertToB64')
 const User = require("../db/model/user")
 
@@ -41,6 +41,7 @@ const User = require("../db/model/user")
 //   };
 
   const uploadCtrl = async (req, res) => {
+    console.log('body : ', req.body)
     const {userId} = req.body
     const {filename, destination} = req.file
     console.log('uploadCtrl data : ', {filename, destination})

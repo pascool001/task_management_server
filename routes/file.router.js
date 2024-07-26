@@ -6,6 +6,6 @@ const uploadMdw = require('../middlewares/uploadFiles')
 
 const authenticate = require('../middlewares/authenticate') 
 
-fileRoutes.post("/upload", authenticate, uploadMdw, uploadCtrl);
+fileRoutes.post("/upload", uploadMdw, uploadCtrl);
 
 module.exports = fileRoutes
