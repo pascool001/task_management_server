@@ -43,20 +43,22 @@ const User = require("../db/model/user")
   const uploadCtrl = async (req, res) => {
     const {userId} = req.body
     const {filename, destination} = req.file
-
+    console.log('uploadCtrl data : ', {filename, destination})
     const filepath =`${destination}${filename}`;
     // convertion du ficher en Base
     const B64 = await convertB64(filepath);
     // mise à jour du model User
     await User.findByIdAndUpdate(userId, {avatar:B64})
     const user = await User.findById(userId)
+    console.log('user: ', user)
     // suppression du fichier apres la maj du model
     try {
         fs.unlinkSync(filepath);
         console.log(`File ${filepath} has been deleted.`);
-      } catch (err) {
+    } catch (err) {
+        console.log('fs.unlinkSync error: ', err)
         console.error(err);
-      }
+    }
 
     res.status(200).send({...user.toJSON()});
   }
